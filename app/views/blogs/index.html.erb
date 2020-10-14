@@ -18,6 +18,7 @@
   <tbody>
     <% @blogs.each do |blog| %>
       <tr>
+        <td><%= blog.user.name %></td>
         <td><%= blog.content %></td>
         <td><%= image_tag blog.image.url if blog.image.url %></td>
         <td><%= link_to '投稿を確認', blog %></td>
