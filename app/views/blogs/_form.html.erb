@@ -13,13 +13,15 @@
 
   <div class="field">
     <%= form.label :投稿を作成 %>
-    <%= form.text_area :content %>
+    <p class="text-area"><%= form.text_area :content %>
   </div>
-  <div class="field">
+
+  <div class="field select_image">
     <%= form.label :写真 %>
-    <%= form.file_field :image %>
-    <%= form.hidden_field :image_cache %>
+    <p class = "select_image"><%= form.file_field :image %></P>
+    <P><%= form.hidden_field :image_cache %></P>
   </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>
