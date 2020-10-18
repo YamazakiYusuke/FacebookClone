@@ -18,7 +18,8 @@ class BlogsController < ApplicationController
   end
 
   def confirm
-    @blog = current_user.blogs.build(blog_params)
+    @blog = Blog.new(blog_params)
+    @blog.user_id = current_user.id
   end
 
   # GET /blogs/1/edit
