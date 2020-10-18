@@ -28,7 +28,8 @@ class BlogsController < ApplicationController
   # POST /blogs
   # POST /blogs.json
   def create
-    @blog = current_user.blogs.build(blog_params)
+    @blog = Blog.new(blog_params)
+    @blog.user_id = current_user.id
     if params[:back]
       render :new
     else
@@ -65,19 +66,19 @@ class BlogsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_blog
-      @blog = Blog.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_blog
+    @blog = Blog.find(params[:id])
+  end
 
-    def user_select
-      if  current_user == current_user_blog.user_id
-        redirect_to blogs_path, notice: "この操作はできません"
-      end
+  def user_select
+    if  current_user == current_user_blog.user_id
+      redirect_to blogs_path, notice: "この操作はできません"
     end
+  end
 
-    # Only allow a list of trusted parameters through.
-    def blog_params
-      params.require(:blog).permit(:content, :image, :image_cache)
-    end
+  # Only allow a list of trusted parameters through.
+  def blog_params
+    params.require(:blog).permit(:content, :image, :image_cache)
+  end
 end
