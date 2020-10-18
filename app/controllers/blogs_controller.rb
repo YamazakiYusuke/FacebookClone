@@ -14,7 +14,11 @@ class BlogsController < ApplicationController
 
   # GET /blogs/new
   def new
-    @blog = Blog.new
+    if current_user == nil
+      redirect_to blogs_path, notice: "ログインしてください"
+    else
+      @blog = Blog.new
+    end
   end
 
   def confirm
