@@ -14,7 +14,7 @@ class BlogsController < ApplicationController
 
   # GET /blogs/new
   def new
-    if current_user == nil
+    unless current_user
       redirect_to blogs_path, notice: "ログインしてください"
     else
       @blog = Blog.new
@@ -24,6 +24,7 @@ class BlogsController < ApplicationController
   def confirm
     @blog = Blog.new(blog_params)
     @blog.user_id = current_user.id
+    render :new if @blog.invalid?
   end
 
   # GET /blogs/1/edit
